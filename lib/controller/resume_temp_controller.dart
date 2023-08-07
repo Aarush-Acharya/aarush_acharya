@@ -98,7 +98,8 @@ class ResumeTempController extends GetxController {
 
 // Get Git User
 
-    var request = http.Request('GET', Uri.parse('${location}/api/github_user.ts'));
+    var request = http.Request('GET', Uri.parse('https://api.github.com/user'));
+    request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
 
@@ -120,7 +121,8 @@ class ResumeTempController extends GetxController {
 // Get Git User Emails
 
     var request_email =
-         http.Request('GET', Uri.parse('${location}/api/github_emails.ts'));
+        http.Request('GET', Uri.parse('https://api.github.com/user/emails'));
+    request_email.headers.addAll(headers);
 
     http.StreamedResponse response_emails = await request_email.send();
 
@@ -182,7 +184,7 @@ class ResumeTempController extends GetxController {
       var request_pr_issue = http.Request(
           'GET',
           Uri.parse(
-              '${location}/api/github_pr.ts'));
+              'https://api.github.com/search/issues?q=author:Aarush-Acharya&type:issue&state:open&is:open'));
 
       request_pr_issue.headers.addAll(headers);
 
