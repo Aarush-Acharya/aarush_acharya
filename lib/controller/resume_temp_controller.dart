@@ -34,7 +34,7 @@ class ResumeTempController extends GetxController {
 
   // Tokens
   var auth_token = "oA2kyJ8EktEKl995UQZUpm4N";
-  var git_access_token = "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";
+  var git_access_token = "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";
   // ------------------------------------------------------
 
   var push_repo_names = [];
