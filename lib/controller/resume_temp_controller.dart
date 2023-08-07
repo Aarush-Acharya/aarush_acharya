@@ -75,6 +75,7 @@ class ResumeTempController extends GetxController {
 
     var request_projects =
         http.Request('GET', Uri.parse('${location}/api/vercel_projects.ts'));
+    print(location);
     http.StreamedResponse response_projects = await request_projects.send();
 
     print("Getting vercel deploys");
@@ -84,6 +85,7 @@ class ResumeTempController extends GetxController {
       projects = await response_projects.stream.bytesToString();
       projects = jsonDecode(projects);
       projects = projects["projects"];
+      print(projects);
       vercel_fetched.value = true;
     } else {
       print("Could not get projects");
