@@ -183,8 +183,7 @@ class ResumeTempController extends GetxController {
       CreateRepos = CreateRepos.toSet().toList();
       var request_pr_issue = http.Request(
           'GET',
-          Uri.parse(
-              'https://api.github.com/search/issues?q=author:Aarush-Acharya&type:issue&state:open&is:open'));
+          Uri.parse('https://api.github.com/search/issues?q=author:Aarush-Acharya&type:issue&state:open&is:open'));
 
       request_pr_issue.headers.addAll(headers);
 
