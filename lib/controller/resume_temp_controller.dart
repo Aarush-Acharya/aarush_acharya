@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:window_location_href/window_location_href.dart';
 
 class ResumeTempController extends GetxController {
   // Is presseds
@@ -37,6 +38,10 @@ class ResumeTempController extends GetxController {
   var git_access_token = "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";
   // ------------------------------------------------------
 
+  // Current URL
+  final location = href == null ? null : href;
+  // -------------------------
+
   var push_repo_names = [];
   var UserInfo;
   var activity;
@@ -68,13 +73,8 @@ class ResumeTempController extends GetxController {
   Future<void> load() async {
 // Get Vercel Projects
 
-    headers_projects = {'Authorization': 'Bearer ${auth_token}'};
-
     var request_projects =
-        http.Request('GET', Uri.parse('https://api.vercel.com/v9/projects'));
-
-    request_projects.headers.addAll(headers_projects);
-
+        http.Request('GET', Uri.parse('${location}/api/vercel_projects.ts'));
     http.StreamedResponse response_projects = await request_projects.send();
 
     print("Getting vercel deploys");
@@ -98,8 +98,7 @@ class ResumeTempController extends GetxController {
 
 // Get Git User
 
-    var request = http.Request('GET', Uri.parse('https://api.github.com/user'));
-    request.headers.addAll(headers);
+    var request = http.Request('GET', Uri.parse('${location}/api/github_user.ts'));
 
     http.StreamedResponse response = await request.send();
 
@@ -121,8 +120,7 @@ class ResumeTempController extends GetxController {
 // Get Git User Emails
 
     var request_email =
-        http.Request('GET', Uri.parse('https://api.github.com/user/emails'));
-    request_email.headers.addAll(headers);
+         http.Request('GET', Uri.parse('${location}/api/github_emails.ts'));
 
     http.StreamedResponse response_emails = await request_email.send();
 
@@ -183,7 +181,8 @@ class ResumeTempController extends GetxController {
       CreateRepos = CreateRepos.toSet().toList();
       var request_pr_issue = http.Request(
           'GET',
-          Uri.parse('https://api.github.com/search/issues?q=author:Aarush-Acharya&type:issue&state:open&is:open'));
+          Uri.parse(
+              '${location}/api/github_pr.ts'));
 
       request_pr_issue.headers.addAll(headers);
 
