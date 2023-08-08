@@ -149,8 +149,10 @@ class ResumeTempController extends GetxController {
     print(UserInfo);
     var request =
         http.Request('POST', Uri.parse('${location}/api/github_events.ts'));
-    request.body = UserInfo;
-    
+    var headers = {'Content-Type': 'text/plain'};
+    request.headers.addAll(headers);
+    request.body = '${UserInfo}';
+
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
