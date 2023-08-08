@@ -148,7 +148,7 @@ class ResumeTempController extends GetxController {
     // Get Git Activity
     var request =
         http.Request('POST', Uri.parse('${location}/api/github_events.ts'));
-    request.body = jsonEncode('${EmailInfo}');
+    request.body = jsonEncode(UserInfo);
 
     http.StreamedResponse response = await request.send();
 
