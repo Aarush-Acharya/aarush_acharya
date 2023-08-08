@@ -146,10 +146,11 @@ class ResumeTempController extends GetxController {
 
   Future<void> getGithubActivity() async {
     // Get Git Activity
+    print(UserInfo);
     var request =
         http.Request('POST', Uri.parse('${location}/api/github_events.ts'));
-    request.body = jsonEncode('${UserInfo}');
-
+    request.body = UserInfo;
+    
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
