@@ -156,6 +156,7 @@ class ResumeTempController extends GetxController {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
+      print("Success Activity");
       activity = await response.stream.bytesToString();
       activity = jsonDecode(activity);
       activity = activity['json'];
