@@ -101,8 +101,8 @@ class ResumeTempController extends GetxController {
 
 // Get Git User
 
-    var request = http.Request('GET', Uri.parse('https://api.github.com/user'));
-    request.headers.addAll(headers);
+    var request =
+        http.Request('GET', Uri.parse('${location}/api/github_user.ts'));
 
     http.StreamedResponse response = await request.send();
 
@@ -110,7 +110,7 @@ class ResumeTempController extends GetxController {
       print("Got User");
       UserInfo = await response.stream.bytesToString();
       UserInfo = jsonDecode(UserInfo);
-
+      UserInfo = UserInfo['json'];
       profile_url = UserInfo['avatar_url'].toString();
       name_feild.text = UserInfo['name'];
       github_unme_feild.text = UserInfo['login'];
@@ -124,8 +124,7 @@ class ResumeTempController extends GetxController {
 // Get Git User Emails
 
     var request_email =
-        http.Request('GET', Uri.parse('https://api.github.com/user/emails'));
-    request_email.headers.addAll(headers);
+        http.Request('GET', Uri.parse('${location}/api/github_emails.ts'));
 
     http.StreamedResponse response_emails = await request_email.send();
 
@@ -133,6 +132,7 @@ class ResumeTempController extends GetxController {
       print("Got email");
       EmailInfo = await response_emails.stream.bytesToString();
       EmailInfo = jsonDecode(EmailInfo);
+      EmailInfo = EmailInfo['json'];
       email_feild.text = EmailInfo[0]["email"];
     } else {
       print("Could not get email");
@@ -184,18 +184,15 @@ class ResumeTempController extends GetxController {
         commits += record_push[k] as int;
       });
       CreateRepos = CreateRepos.toSet().toList();
-      var request_pr_issue = http.Request(
-          'GET',
-          Uri.parse(
-              'https://api.github.com/search/issues?q=author:Aarush-Acharya&type:issue&state:open&is:open'));
-
-      request_pr_issue.headers.addAll(headers);
+      var request_pr_issue =
+          http.Request('GET', Uri.parse('${location}/api/github_pr.ts'));
 
       http.StreamedResponse response_pr_issue = await request_pr_issue.send();
 
       if (response_pr_issue.statusCode == 200) {
         pr_issue = await response_pr_issue.stream.bytesToString();
         pr_issue = jsonDecode(pr_issue);
+        pr_issue = pr_issue['json'];
         pr_issue_num = pr_issue["total_count"];
       } else {
         print(response_pr_issue.reasonPhrase);
