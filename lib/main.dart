@@ -52,15 +52,15 @@ class ResumeState extends State<Resume> {
                   ),
                   controller.profile_isPressed.value
                       ? Obx(
-                          () => controller.profileisthere.value
-                              ? Container(
+                          () => Container(
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(90),
                                       gradient: const LinearGradient(colors: [
                                         Color.fromARGB(255, 26, 153, 182),
                                         Color.fromARGB(255, 81, 215, 245),
                                       ])),
-                                  child: Padding(
+                                  child: controller.profileisthere.value
+                              ? Padding(
                                     padding: EdgeInsets.symmetric(
                                         vertical: 0.006134 *
                                             MediaQuery.of(context).size.height,
@@ -83,11 +83,45 @@ class ResumeState extends State<Resume> {
                                             controller.profile_url.toString()),
                                       ),
                                     ),
-                                  ),
+                                  ): SizedBox(
+                              child: Center(
+                                child: GradientProgressIndicator(
+                                  radius: 0.0092*MediaQuery.of(context).size.height + 0.0052*MediaQuery.of(context).size.width,
+                                  duration: 3,
+                                  strokeWidth: 4,
+                                  gradientStops: const [
+                                    0.5,
+                                    0.5,
+                                  ],
+                                  gradientColors: const [
+                                    Colors.white,
+                                    Colors.grey,
+                                  ],
+                                  child: SizedBox(),
+                                ),
+                              ),
+                            ),
                                 )
-                              : SizedBox(),
+                              
                         )
-                      : SizedBox(),
+                      : SizedBox(
+                              child: Center(
+                                child: GradientProgressIndicator(
+                                  radius: 0.012*MediaQuery.of(context).size.height + 0.0069*MediaQuery.of(context).size.width,
+                                  duration: 3,
+                                  strokeWidth: 4,
+                                  gradientStops: const [
+                                    0.5,
+                                    0.5,
+                                  ],
+                                  gradientColors: const [
+                                    Colors.white,
+                                    Colors.grey,
+                                  ],
+                                  child: SizedBox(),
+                                ),
+                              ),
+                            ),
                   SizedBox(
                     width: 0.02 * MediaQuery.of(context).size.width,
                   ),
@@ -101,8 +135,8 @@ class ResumeState extends State<Resume> {
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                     child: Padding(
                         padding: EdgeInsets.symmetric(
-                          horizontal: 15,
-                          vertical: 10,
+                          horizontal: 0.0104*MediaQuery.of(context).size.width,
+                          vertical: 0.0122*MediaQuery.of(context).size.height,
                         ),
                         child: Column(children: [
                           TextField(
@@ -474,10 +508,23 @@ class ResumeState extends State<Resume> {
                                   ),
                                 )
                               : SizedBox(
-                                  child: Center(
-                                    child: Text("Loading ..."),
-                                  ),
+                              child: Center(
+                                child: GradientProgressIndicator(
+                                  radius: 0.012*MediaQuery.of(context).size.height + 0.0069*MediaQuery.of(context).size.width,
+                                  duration: 3,
+                                  strokeWidth: 4,
+                                  gradientStops: const [
+                                    0.5,
+                                    0.5,
+                                  ],
+                                  gradientColors: const [
+                                    Colors.white,
+                                    Colors.grey,
+                                  ],
+                                  child: SizedBox(),
                                 ),
+                              ),
+                            ),
                         )
                       : SizedBox(),
                   SizedBox(
@@ -683,21 +730,23 @@ class ResumeState extends State<Resume> {
                                   ),
                                 )
                               : SizedBox(
-                                  child: Center(
-                                    child: Text(
-                                      "Loading ...",
-                                      style: TextStyle(
-                                          fontSize: 0.0085 *
-                                                  MediaQuery.of(context)
-                                                      .size
-                                                      .height +
-                                              0.0048 *
-                                                  MediaQuery.of(context)
-                                                      .size
-                                                      .width),
-                                    ),
-                                  ),
+                              child: Center(
+                                child: GradientProgressIndicator(
+                                  radius: 0.012*MediaQuery.of(context).size.height + 0.0069*MediaQuery.of(context).size.width,
+                                  duration: 3,
+                                  strokeWidth: 4,
+                                  gradientStops: const [
+                                    0.5,
+                                    0.5,
+                                  ],
+                                  gradientColors: const [
+                                    Colors.white,
+                                    Colors.grey,
+                                  ],
+                                  child: SizedBox(),
                                 ),
+                              ),
+                            ),
                         )
                       : SizedBox(),
                   SizedBox(
@@ -1039,7 +1088,7 @@ class ResumeState extends State<Resume> {
                           : SizedBox(
                               child: Center(
                                 child: GradientProgressIndicator(
-                                  radius: 40,
+                                  radius: 0.0245*MediaQuery.of(context).size.height + 0.0138*MediaQuery.of(context).size.width,
                                   duration: 3,
                                   strokeWidth: 4,
                                   gradientStops: const [
