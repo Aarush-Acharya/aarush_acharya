@@ -206,7 +206,7 @@ class ResumeTempController extends GetxController {
 
   Future<void> getGithubMap() async {
     //Get Map Data
-    var request = http.Request('POST', Uri.parse('${location}/api/commits.ts'));
+    var request = http.Request('POST', Uri.parse('${location}/api/github_commits.ts'));
     request.body = jsonEncode(UserInfo);
 
     http.StreamedResponse response = await request.send();
