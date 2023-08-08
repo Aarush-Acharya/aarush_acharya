@@ -84,6 +84,7 @@ class ResumeTempController extends GetxController {
       print("Got projects");
       projects = await response_projects.stream.bytesToString();
       projects = jsonDecode(projects);
+      projects = projects["json"];
       projects = projects["projects"];
       print(projects);
       vercel_fetched.value = true;
