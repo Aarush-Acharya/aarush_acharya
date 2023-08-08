@@ -149,8 +149,6 @@ class ResumeTempController extends GetxController {
     print(UserInfo);
     var request =
         http.Request('POST', Uri.parse('${location}/api/github_events.ts'));
-    var headers = {'Content-Type': 'text/plain'};
-    request.headers.addAll(headers);
     request.body = jsonEncode(UserInfo);
 
     http.StreamedResponse response = await request.send();
@@ -159,6 +157,7 @@ class ResumeTempController extends GetxController {
       print("Success Activity");
       activity = await response.stream.bytesToString();
       activity = jsonDecode(activity);
+      print(activity);
       activity = activity['json'];
       print(activity);
       for (var i = 0; i < activity.length; i++) {
@@ -207,21 +206,15 @@ class ResumeTempController extends GetxController {
 
   Future<void> getGithubMap() async {
     //Get Map Data
-    var headers = {
-      'Authorization': 'bearer ${git_access_token}',
-      'Content-Type': 'text/plain'
-    };
-    var request =
-        http.Request('POST', Uri.parse('https://api.github.com/graphql'));
-    request.body =
-        '''{"query":"query {\\n  user(login: \\"${UserInfo['login']}\\") {\\n    name\\n    contributionsCollection {\\n      contributionCalendar {\\n        colors\\n        totalContributions\\n        weeks {\\n          contributionDays {\\n            color\\n            contributionCount\\n            date\\n            weekday\\n          }\\n          firstDay\\n        }\\n      }\\n    }\\n  }\\n}"}''';
-    request.headers.addAll(headers);
+    var request = http.Request('POST', Uri.parse('${location}/api/commits.ts'));
+    request.body = jsonEncode(UserInfo);
 
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
       contridata = await response.stream.bytesToString();
       contridata = jsonDecode(contridata);
+      contridata = contridata['json'];
       contridata = contridata["data"]["user"]["contributionsCollection"]
           ["contributionCalendar"];
       totalCount = contridata["totalContributions"];
