@@ -155,6 +155,7 @@ class ResumeTempController extends GetxController {
     if (response.statusCode == 200) {
       activity = await response.stream.bytesToString();
       activity = jsonDecode(activity);
+      activity = activity['json'];
 
       for (var i = 0; i < activity.length; i++) {
         if (activity[i]['type'] == "PushEvent") {
