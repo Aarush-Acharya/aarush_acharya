@@ -156,7 +156,7 @@ class ResumeTempController extends GetxController {
       activity = await response.stream.bytesToString();
       activity = jsonDecode(activity);
       activity = activity['json'];
-
+      print(activity);
       for (var i = 0; i < activity.length; i++) {
         if (activity[i]['type'] == "PushEvent") {
           PushRepos.add({
